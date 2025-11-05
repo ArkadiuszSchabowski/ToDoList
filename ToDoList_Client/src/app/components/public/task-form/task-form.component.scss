@@ -1,0 +1,21 @@
+#form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(233, 233, 227);
+}
+
+#form-task{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+}
+
+#header{
+  font-size: 26px;
+  margin-bottom: 20px;
+}

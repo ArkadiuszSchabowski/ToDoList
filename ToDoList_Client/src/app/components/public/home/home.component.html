@@ -1,0 +1,38 @@
+<div id="home-container" class="component-container">
+  <div id="task-container" *ngIf="paginationResult.results.length != 0">
+    <div id="task-title">
+      <div class="task-header blue">Title</div>
+      <div class="task-item" *ngFor="let task of paginationResult.results">
+        {{ task.title }}
+      </div>
+    </div>
+    <div id="task-description">
+      <div class="task-header blue">Description</div>
+      <div class="task-item" *ngFor="let task of paginationResult.results">
+        {{ task.description }}
+      </div>
+    </div>
+    <div id="task-status">
+      <div class="task-header blue">Status</div>
+      <div class="task-item" *ngFor="let task of paginationResult.results">
+        {{ task.status }}
+        <div class="button-icon-container">
+          <button class="margin-left-5 blue" (click)="changeStatus(task)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button class="margin-left-5 color-red" (click)="removeTask(task.id)">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator class="mat-paginator"
+    [length]="paginationResult.totalCount"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page"
+    (page)="changePage($event)"
+  >
+  </mat-paginator>
+</div>
