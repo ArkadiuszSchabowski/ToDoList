@@ -35,6 +35,9 @@
             autocomplete="off"
             matInput
           />
+          <mat-error *ngIf="taskForm.get('description')?.hasError('required')">
+            Description is required.
+          </mat-error>
           <mat-error
             *ngIf="
               taskForm.get('description')?.hasError('minlength') ||
