@@ -27,7 +27,7 @@ namespace ToDoList_Server.Repositories
         public async Task<List<TaskItem>> GetAsync(PaginationDto dto)
         {
             return await _context.TaskItems
-                .OrderBy(x => x.Status)
+                .OrderBy(x => x.Title)
                 .Skip((dto.PageNumber - 1) * dto.PageSize)
                 .Take(dto.PageSize)
                 .ToListAsync();
