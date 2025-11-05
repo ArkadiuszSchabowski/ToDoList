@@ -1,0 +1,68 @@
+<div id="form-container" class="component-container">
+  <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+    <mat-card>
+      <mat-card-content id="form-task">
+        <div id="header" class="task-header blue">Create Your Task</div>
+
+        <mat-form-field class="margin-10">
+          <mat-label>Title</mat-label>
+          <input
+            id="title"
+            formControlName="title"
+            type="text"
+            autocomplete="off"
+            matInput
+          />
+          <mat-error *ngIf="taskForm.get('title')?.hasError('required')">
+            Title is required.
+          </mat-error>
+          <mat-error
+            *ngIf="
+              taskForm.get('title')?.hasError('minlength') ||
+              taskForm.get('title')?.hasError('maxlength')
+            "
+          >
+            Title must be between 5 and 50 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="margin-10">
+          <mat-label>Description</mat-label>
+          <input
+            id="description"
+            formControlName="description"
+            type="text"
+            autocomplete="off"
+            matInput
+          />
+          <mat-error
+            *ngIf="
+              taskForm.get('description')?.hasError('minlength') ||
+              taskForm.get('description')?.hasError('maxlength')
+            "
+          >
+            Description must be between 10 and 200 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="margin-10">
+          <mat-label>Status</mat-label>
+          <mat-select id="status" formControlName="status">
+            <mat-option *ngFor="let status of statuses" [value]="status.value">
+              {{ status.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="taskForm.get('status')?.hasError('required')">
+            Status is required.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit">
+            Create
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

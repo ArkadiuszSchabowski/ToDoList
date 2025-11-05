@@ -1,1 +1,84 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$ToDoList_Client-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+:root {
+  @include mat.all-component-themes($ToDoList_Client-theme);
+}
+
+mat-form-field{
+  width: 350px;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f4f3fa;
+}
+
+.component-container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - 70px);
+  min-height: calc(100vh - 70px);
+  width: 100%;
+  margin-top: 70px;
+}
+
+.task-header {
+  font-weight: bolder;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 20px;
+}
+.margin-10 {
+  margin: 10px;
+}
+
+.margin-left-5 {
+  margin-left: 5px;
+}
+.color-red {
+  color: red;
+}
+
+.blue {
+  color: #2196F3;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .component-container {
+    height: calc(100% - 90px);
+    min-height: calc(100vh - 90px);
+    margin-top: 90px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .component-container {
+    height: calc(100% - 90px);
+    min-height: calc(100vh - 90px);
+    margin-top: 90px;
+  }
+}
