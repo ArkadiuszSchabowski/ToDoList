@@ -1,5 +1,5 @@
 export interface AddTaskDto {
     title: string;
-    description: string | null;
+    description: string;
     status: string;
 }

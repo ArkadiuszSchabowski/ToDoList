@@ -48,7 +48,14 @@ export class TaskFormComponent implements OnInit {
           Validators.maxLength(50),
         ],
       ],
-      description: ['', [Validators.minLength(10), Validators.maxLength(200)]],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(200),
+        ],
+      ],
       status: ['', Validators.required],
     });
   }
@@ -65,16 +72,16 @@ export class TaskFormComponent implements OnInit {
     this.taskService.post(taskData).subscribe({
       next: (response) => {
         console.log(response);
-      Object.keys(this.taskForm.controls).forEach(key => {
-        const control = this.taskForm.get(key);
-        if (control) {
-          control.reset('');
-          control.setErrors(null);
-          control.markAsPristine();
-          control.markAsUntouched();
-        }
-      });
-    },
+        Object.keys(this.taskForm.controls).forEach((key) => {
+          const control = this.taskForm.get(key);
+          if (control) {
+            control.reset('');
+            control.setErrors(null);
+            control.markAsPristine();
+            control.markAsUntouched();
+          }
+        });
+      },
       error: (error) => {
         console.error(error);
       },
