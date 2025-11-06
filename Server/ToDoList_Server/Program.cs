@@ -12,6 +12,12 @@ using ToDoList_Server_Database.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var isDocker = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+if (isDocker)
+{
+    builder.WebHost.UseUrls("http://*:5000");
+}
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -56,7 +62,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("CorsPolicy");
 
-app.UseHttpsRedirection();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<MyDbContext>();
+    context.Database.Migrate();
+}
+
+    app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

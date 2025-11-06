@@ -1,0 +1,21 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /src
+
+COPY ToDoList_Server/*.csproj ./Server/ToDoList_Server/
+COPY ToDoList_Server_Database/*.csproj ./Server/ToDoList_Server_Database/
+COPY ToDoList_Server_Shared/*.csproj ./Server/ToDoList_Server_Shared/
+
+RUN dotnet restore ./Server/ToDoList_Server/ToDoList_Server.csproj
+
+COPY ToDoList_Server ./Server/ToDoList_Server/
+COPY ToDoList_Server_Database ./Server/ToDoList_Server_Database/
+COPY ToDoList_Server_Shared ./Server/ToDoList_Server_Shared/
+
+RUN dotnet publish ./Server/ToDoList_Server/ToDoList_Server.csproj -c Release -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+WORKDIR /app
+
+COPY --from=build /app/publish ./
+
+ENTRYPOINT ["dotnet", "ToDoList_Server.dll"]
