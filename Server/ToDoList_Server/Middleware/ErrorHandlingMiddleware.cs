@@ -13,24 +13,24 @@ namespace ToDoList_Server.Middleware
             catch (BadRequestException e)
             {
                 context.Response.StatusCode = 400;
-                await context.Response.WriteAsync(e.Message);
+                await context.Response.WriteAsync(e.ToString());
             }
 
             catch (NotFoundException e)
             {
                 context.Response.StatusCode = 404;
-                await context.Response.WriteAsync(e.Message);
+                await context.Response.WriteAsync(e.ToString());
             }
             catch (ConflictException e)
             {
                 context.Response.StatusCode = 409;
-                await context.Response.WriteAsync(e.Message);
+                await context.Response.WriteAsync(e.ToString());
             }
 
-            catch (Exception)
+            catch (Exception e)
             {
                 context.Response.StatusCode = 500;
-                await context.Response.WriteAsync("Unexpected server error. Try again later.");
+                await context.Response.WriteAsync(e.ToString());
             }
         }
     }
