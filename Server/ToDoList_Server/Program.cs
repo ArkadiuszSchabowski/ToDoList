@@ -4,6 +4,7 @@ using ToDoList_Server.Interfaces;
 using ToDoList_Server.Interfaces.Aggregates;
 using ToDoList_Server.Middleware;
 using ToDoList_Server.Repositories;
+using ToDoList_Server.Seeders;
 using ToDoList_Server.Services;
 using ToDoList_Server.Validators;
 using ToDoList_Server.Validators.Aggregates;
@@ -52,6 +53,8 @@ builder.Services.AddScoped<ITaskValidator, TaskValidator>();
 builder.Services.AddScoped<IEntityValidator<TaskItem>, EntityValidator>();
 builder.Services.AddScoped<IPaginationValidator, PaginationValidator>();
 
+builder.Services.AddScoped<ISeeder, TaskSeeder>();
+
 var app = builder.Build();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
@@ -69,6 +72,10 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<MyDbContext>();
     context.Database.Migrate();
+
+    var taskSeeder = services.GetRequiredService<ISeeder>();
+
+    taskSeeder.SeedData();
 }
 
     app.UseHttpsRedirection();
