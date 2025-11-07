@@ -39,7 +39,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<MyDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString")));
+builder.Services.AddDbContext<MyDbContext>(opt => opt.UseNpgsql(builder.Configuration.GetConnectionString("MyDbConnectionString")));
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
