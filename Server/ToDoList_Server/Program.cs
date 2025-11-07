@@ -54,6 +54,8 @@ builder.Services.AddScoped<IPaginationValidator, PaginationValidator>();
 
 var app = builder.Build();
 
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
