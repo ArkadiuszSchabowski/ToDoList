@@ -4,38 +4,23 @@
     class="blue"
     *ngIf="paginationResult.results.length == 0"
   >
-  <div id="task-no-result-title">
-    Ready to get started? 
-  </div>
-  <div class="margin-10">
-    Add your first task!
-  </div>
+    <div id="task-no-result-title">Ready to get started?</div>
+    <div class="padding-10">Add your first task!</div>
   </div>
   <div id="task-container" *ngIf="paginationResult.results.length != 0">
-    <div id="task-title">
-      <div class="task-header blue">Title</div>
-      <div class="task-item" *ngFor="let task of paginationResult.results">
-        {{ task.title }}
+    <div class="task-container-item" *ngFor="let task of paginationResult.results">
+      <div class="task">
+        <div class="task-item">Title: {{ task.title }}</div>
+        <div class="task-item">Description: {{ task.description }}</div>
+        <div class="task-item">Status: {{ task.status }}</div>
       </div>
-    </div>
-    <div id="task-description">
-      <div class="task-header blue">Description</div>
-      <div class="task-item" *ngFor="let task of paginationResult.results">
-        {{ task.description }}
-      </div>
-    </div>
-    <div id="task-status">
-      <div class="task-header blue">Status</div>
-      <div class="task-item" *ngFor="let task of paginationResult.results">
-        {{ task.status }}
-        <div class="button-icon-container">
-          <button class="margin-left-5 blue" (click)="changeStatus(task)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button class="margin-left-5 color-red" (click)="removeTask(task.id)">
-            <mat-icon>delete_forever</mat-icon>
-          </button>
-        </div>
+      <div id="button-icon-container">
+        <button id="status-button" class="blue" (click)="changeStatus(task)">
+          <div>Change status</div><mat-icon class="status-button-icon">edit</mat-icon>
+        </button>
+        <button id="remove-button" class="color-red" (click)="removeTask(task.id)">
+          <mat-icon class="status-button-icon">delete_forever</mat-icon>
+        </button>
       </div>
     </div>
   </div>
