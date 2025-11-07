@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../../_services/task.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-task-form',
@@ -39,7 +40,7 @@ export class TaskFormComponent implements OnInit {
     { value: 'Completed', viewValue: 'Completed' },
   ];
 
-  constructor(private fb: FormBuilder, private taskService: TaskService) {}
+  constructor(private fb: FormBuilder, private taskService: TaskService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.taskForm = this.fb.group({
@@ -81,9 +82,15 @@ export class TaskFormComponent implements OnInit {
           control.markAsUntouched();
           control.updateValueAndValidity({ onlySelf: true, emitEvent: false });
         });
+
+        this.toastr.success("Task added successfully.")
       },
       error: (error) => {
-        console.error(error);
+        if(error.status === 409){
+          this.toastr.error(error.error);
+        } else {
+          this.toastr.error("Unexpected server error.")
+        }
       },
     });
   }
