@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -20,13 +20,16 @@ export class HomeComponent implements OnInit {
   paginationDto: PaginationDto = new PaginationDto();
   paginationResult: PaginationResult<GetTaskDto> = new PaginationResult();
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getTasks();
   }
 
-    changePage(event: PageEvent) {
+  changePage(event: PageEvent) {
     this.paginationDto.pageNumber = event.pageIndex + 1;
     this.paginationDto.pageSize = event.pageSize;
 
@@ -43,7 +46,7 @@ export class HomeComponent implements OnInit {
       next: (response) => {
         this.paginationResult = response;
       },
-      error: (error) => console.log(error),
+      error: () => this.toastr.error("Unexpected server error.")
     });
   }
 
@@ -60,12 +63,17 @@ export class HomeComponent implements OnInit {
 
     this.taskService.put(task.id, status).subscribe({
       next: () => this.getTasks(),
+      error: () => this.toastr.error("Unexpected server error."),
     });
   }
 
   removeTask(id: number) {
     this.taskService.remove(id).subscribe({
-      next: () => this.getTasks(),
+      next: () => {
+        this.getTasks();
+        this.toastr.success('Task removed successfully.');
+      },
+      error: () => this.toastr.error("Unexpected server error."),
     });
   }
 }
