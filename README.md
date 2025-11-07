@@ -3,11 +3,11 @@
 **About the Project:**
 A simple application for managing your daily tasks. Stay organized and never forget what needs to be done again!
 
-<img width="500" src="https://github.com/user-attachments/assets/027d2445-3d63-4c93-ba76-92aff163f81a" />
+<img width="400" src="https://github.com/user-attachments/assets/027d2445-3d63-4c93-ba76-92aff163f81a" />
 
 ---
 
-<img width="500" src="https://github.com/user-attachments/assets/865eccee-ad41-490c-a7b1-145186fb0c0c" />
+<img width="400" src="https://github.com/user-attachments/assets/865eccee-ad41-490c-a7b1-145186fb0c0c" />
 
 
 ---
