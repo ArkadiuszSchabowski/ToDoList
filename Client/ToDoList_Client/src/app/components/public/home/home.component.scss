@@ -4,6 +4,7 @@
   width: 100vw;
   min-width: 1000px;
   height: auto;
+  min-height: calc(100vh - 90px);
   background-color: rgb(233, 233, 227);
 }
 
@@ -17,12 +18,27 @@
   text-align: center;
 }
 
+#task-container-without-result{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  width: 100%;
+  min-height: calc(100vh - 90px);
+}
+
 #task-title {
   display: flex;
   flex-direction: column;
   width: 20%;
   min-width: 200px;
   height: auto;
+}
+
+#task-no-result-title{
+  font-size: 32px;
+  font-weight: bold;
 }
 
 #task-description {

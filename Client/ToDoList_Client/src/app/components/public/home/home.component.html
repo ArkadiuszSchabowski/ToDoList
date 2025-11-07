@@ -1,4 +1,16 @@
 <div id="home-container" class="component-container">
+  <div
+    id="task-container-without-result"
+    class="blue"
+    *ngIf="paginationResult.results.length == 0"
+  >
+  <div id="task-no-result-title">
+    Ready to get started? 
+  </div>
+  <div class="margin-10">
+    Add your first task!
+  </div>
+  </div>
   <div id="task-container" *ngIf="paginationResult.results.length != 0">
     <div id="task-title">
       <div class="task-header blue">Title</div>
@@ -27,7 +39,9 @@
       </div>
     </div>
   </div>
-  <mat-paginator class="mat-paginator"
+  <mat-paginator
+    class="mat-paginator mat-paginator-home"
+    *ngIf="paginationResult.results.length != 0"
     [length]="paginationResult.totalCount"
     [pageSize]="10"
     [pageSizeOptions]="[5, 10, 25, 100]"
